@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @keyframes example {
+        0% {
+          margin-left: -50px;
+          opacity: 0;
+          background-color: red;
+        }
+        100% {
+          margin-left: 0;
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <input type="number" id="input" />
+    <div id="arr"></div>
+  </body>
+  <script>
+    const input = document.getElementById("input");
+    const arr = document.getElementById("arr");
+    input.addEventListener("input", (e) => {
+      let total,
+        array = [];
+      let max = e.target.value;
+      for (let i = 0; i < 99; i++) {
+        for (let i = 0; i < Math.ceil(Math.random() * max); i++) {
+          array.push(Math.ceil(Math.random() * 3));
+        }
+        total = array.reduce((a, b) => a + b, 0);
+        if (total == input.value) {
+          let div = document.createElement("div");
+          div.innerHTML = array;
+          div.style.animation = `example ${i / 99}s`;
+          arr.appendChild(div);
+          array.pop();
+        } else {
+          array = [];
+        }
+      }
+    });
+  </script>
+</html>
